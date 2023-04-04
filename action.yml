@@ -2,7 +2,7 @@
 name: 'Custom Github Action'
 description: 'A Github Action that takes an input and returns the square of the number'
 inputs: 
- nums:
+ num:
   description: 'Enter a number'
   required: true
   default: "1"
@@ -11,7 +11,7 @@ outputs:
 num_squared:
  description: 'Square of the input'
  value: ${{steps.get-square.outputs.num_squared}}
-runs:
+run:
  using: 'composite'
  steps: 
   - name: Install Python
