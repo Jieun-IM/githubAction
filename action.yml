@@ -1,28 +1,29 @@
 #action.yaml
 name: 'Custom Github Action'
-description: 'A github Action that takes an input and returns the square of the number'
+description: 'A Github Action that takes an input and returns the square of the number'
 inputs: 
- num:
+ nums:
+  description: 'Enter a number'
   required: true
   default: "1"
+  
 outputs:
- num_squared:
-   value: ${{steps.get-square.outputs.num_squared}}
+num_squared:
+ description: 'Square of the input'
+ value: ${{steps.get-square.outputs.num_squared}}
 runs:
  using: 'composite'
- steps:
-   -name: Install Python
-    uses: actions/setup-python@v4
-    with:
-     python-version: '3.10'
-   -name: Install Dependencies
-    run: pip install -r requirements.txt
-    shell: bash
-   -name: Pass Inputs to shell
-    run: |
-      echo "INPUT_NUM=${{inputs.num}}">> $GITHUB_ENV
-    shell: bash
-   -name: Fetch the number's square
-    id: get-square
-    run: python src/get_num_square.py
-    shell: bash
+ steps: 
+  -name: Install Python
+   uses: actions/setup-python@v4
+   with:
+    python-version: '3.10'
+  -name: Install Dependencies
+   run: pip install -r requirements.txt
+   shell: bash
+  -name: Fetch the number's square
+   id: get-square
+   run: python src/get_num_square.py
+   shell: bash
+   
+    
